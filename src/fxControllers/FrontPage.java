@@ -451,7 +451,7 @@ public class FrontPage {
         stage.setScene(scene);
         stage.show();
         UpdateDestination updateDestination = fxmlLoader.getController();
-        updateDestination.setData(entityManagerFactory, destinationList.getSelectionModel().getSelectedItem());
+        updateDestination.setData(entityManagerFactory, destinationList.getSelectionModel().getSelectedItem(), true);
         destinationList.getItems().clear();
         fillList();
     }
@@ -465,7 +465,7 @@ public class FrontPage {
         stage.setScene(scene);
         stage.show();
         CreateDestination createDestination = fxmlLoader.getController();
-        createDestination.setData(entityManagerFactory);
+        createDestination.setData(entityManagerFactory, manager);
         destinationList.getItems().clear();
         fillList();
     }
