@@ -60,6 +60,32 @@ public class TruckerLoginTest {
     }
 
     @Test
+    void testLoginSuccessful() throws IOException {
+        // Arrange
+        Trucker trucker = new Trucker();
+        trucker.setEmail("test@example.com");
+        trucker.setPassword("password");
+        when(truckerHib.getTruckerByLoginData(anyString(), anyString())).thenReturn(trucker);
+        when(fxmlLoader.load()).thenReturn(new Parent() {});
+        when(fxmlLoader.getController()).thenReturn(frontPage);
+        TextField emailField = new TextField("test@example.com");
+        PasswordField passwordField = new PasswordField();
+        passwordField.setText("password");
+        loginPage.setEmailField(emailField);
+        loginPage.setPasswordField(passwordField);
+
+        // Act
+        loginPage.login();
+
+        // Assert
+        verify(entityManagerFactory).createEntityManager();
+        verify(frontPage).setDataTrucker(entityManagerFactory, trucker, trucker);
+        verify(stage).setTitle("Front page");
+        verify(stage).setScene(any());
+        verify(stage).show();
+    }
+    
+    @Test
     void testLoginFailed() throws IOException {
         // Arrange
         when(truckerHib.getTruckerByLoginData(anyString(), anyString())).thenReturn(null);
