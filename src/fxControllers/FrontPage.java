@@ -4,6 +4,7 @@ import Personel.*;
 import hibernate.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -11,6 +12,8 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -19,11 +22,13 @@ import utils.FxUtils;
 
 import javax.persistence.EntityManagerFactory;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class FrontPage {
+public class FrontPage implements Initializable {
     public TabPane allTabs;
     public Tab managerTab;
     public Tab truckerTab;
@@ -54,6 +59,7 @@ public class FrontPage {
     public DatePicker arrivalFilter;
     public ListView<Forum> forumList;
     public TreeView commentTree;
+    public TextField truckerFilter;
     private EntityManagerFactory entityManagerFactory;
     private ManagerHib managerHib;
     private TruckerHib truckerHib;
@@ -62,7 +68,14 @@ public class FrontPage {
     private TruckHib truckHib;
     private DestinationHib destinationHib;
     private ForumHib forumHib;
+    public ChoiceBox statusFilter;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        statusFilter.getItems().add(Status.AVAILABLE.toString());
+        statusFilter.getItems().add(Status.INPROGRESS.toString());
+        statusFilter.getItems().add(Status.FINISHED.toString());
+    }
     public void setDataManager(EntityManagerFactory entityManagerFactory, User user, Manager manager) {
         this.entityManagerFactory = entityManagerFactory;
         this.managerHib = new ManagerHib(entityManagerFactory);
@@ -525,8 +538,17 @@ public class FrontPage {
     }
 
     public void filterData(ActionEvent actionEvent) {
+        LocalDate localDateDeparture = departureFilter.getValue();
+        LocalDate localDateArrival = arrivalFilter.getValue();
+        destinationList.getItems().clear();
+        destinationHib.getDataByFilter(Status.valueOf(statusFilter.getSelectionModel().getSelectedItem().toString()), localDateDeparture, localDateArrival, Integer.valueOf(truckerFilter.getText())).forEach(e -> {
+            destinationList.getItems().add(e);
+        });
     }
 
     public void removeFilters(ActionEvent actionEvent) {
+        List<Destination> destinations = destinationHib.getAllDestination();
+        destinationList.getItems().clear();
+        destinations.forEach(scientificPaper -> destinationList.getItems().add(scientificPaper));
     }
 }

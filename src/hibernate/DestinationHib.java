@@ -1,6 +1,7 @@
 package hibernate;
 
 import Personel.Destination;
+import Personel.Status;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaQuery;
@@ -15,6 +16,7 @@ public class DestinationHib {
     public DestinationHib(EntityManagerFactory entityManagerFactory) {
         this.emf = entityManagerFactory;
     }
+
     private EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
@@ -59,7 +61,7 @@ public class DestinationHib {
             destination = entityManager.find(Destination.class, id);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("No such cargo by given Id");
+            System.out.println("No such destination by given Id");
         }
         return destination;
     }
@@ -79,5 +81,27 @@ public class DestinationHib {
             }
         }
         return new ArrayList<>();
+    }
+
+    public List<Destination> getDataByFilter(Status status, LocalDate arrivalDate, LocalDate departureDate, int driverID) {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            //queriuko pavyzdys
+            TypedQuery<Destination> query = em.createQuery("SELECT u FROM Destination u WHERE status = :status AND arrivalDate >= :arrivalDate AND departureDate <= :departureDate AND driver.id = :driverID", Destination.class);
+            query.setParameter("status", status);
+            query.setParameter("arrivalDate", arrivalDate);
+            query.setParameter("departureDate", departureDate);
+            query.setParameter("driverID", driverID);
+            return query.getResultList();
+        } catch (NoResultException ex) {
+            System.err.println("not found");
+            return new ArrayList<>();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 }
