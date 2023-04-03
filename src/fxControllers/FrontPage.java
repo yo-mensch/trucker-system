@@ -215,12 +215,13 @@ public class FrontPage {
     public void createComment() throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(CreateForum.class.getResource("../fxml/create-comment-page.fxml"));
         Parent parent = fxmlLoader.load();
-        Scene scene = new Scene(parent);
         Stage stage = new Stage();
         stage.setTitle("Create comment");
-        stage.setScene(scene);
-        stage.show();
         CreateComment createComment = fxmlLoader.getController();
+        setCreateCommentData(createComment);
+    }
+
+    private void setCreateCommentData(CreateComment createComment){
         createComment.setData(entityManagerFactory, forumList.getSelectionModel().getSelectedItem());
     }
 
