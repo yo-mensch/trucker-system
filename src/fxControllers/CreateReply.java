@@ -20,4 +20,10 @@ public class CreateReply {
         this.commentHib = new CommentHib(entityManagerFactory);
         this.selectedComment = selectedComment;
     }
+
+    public void createReply(){
+        Comment comment = null;
+        comment = new Comment(titleField.getText(), descriptionField.getText(), commentHib.getCommentById(selectedComment.getId()));
+        commentHib.createComment(comment);
+    }
 }

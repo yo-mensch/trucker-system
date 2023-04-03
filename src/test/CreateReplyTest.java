@@ -14,10 +14,8 @@ import org.mockito.MockitoAnnotations;
 
 import javax.persistence.EntityManagerFactory;
 
-import java.awt.event.ActionEvent;
-
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 
 public class CreateReplyTest {
     @Mock private EntityManagerFactory entityManagerFactory;
@@ -56,7 +54,7 @@ public class CreateReplyTest {
         ArgumentCaptor<Comment> createdCommentCaptor = ArgumentCaptor.forClass(Comment.class);
 
         // Exercise
-        controllerUnderTest.createReply(new ActionEvent());
+        controllerUnderTest.createReply();
 
         // Verify
         verify(commentHib).createComment(createdCommentCaptor.capture());
