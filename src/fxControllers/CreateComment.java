@@ -9,6 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import javax.persistence.EntityManagerFactory;
+import java.io.IOException;
 
 public class CreateComment {
     public TextField titleField;

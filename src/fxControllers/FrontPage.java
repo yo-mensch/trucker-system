@@ -212,6 +212,18 @@ public class FrontPage {
         comments.forEach(comment -> addTreeItem(comment, commentTree.getRoot()));
     }
 
+    public void createComment() throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(CreateForum.class.getResource("../fxml/create-comment-page.fxml"));
+        Parent parent = fxmlLoader.load();
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        stage.setTitle("Create comment");
+        stage.setScene(scene);
+        stage.show();
+        CreateComment createComment = fxmlLoader.getController();
+        createComment.setData(entityManagerFactory, forumList.getSelectionModel().getSelectedItem());
+    }
+
     private void addTreeItem(Comment comment, TreeItem parent) {
         TreeItem<Comment> treeItem = new TreeItem<>(comment);
         parent.getChildren().add(treeItem);
@@ -469,6 +481,5 @@ public class FrontPage {
         destinationList.getItems().clear();
         fillList();
     }
-
 
 }
