@@ -188,7 +188,7 @@ public class FrontPage {
             Parent parent = fxmlLoader.load();
             Scene scene = new Scene(parent);
             Stage stage = new Stage();
-            stage.setTitle("Delete");
+            stage.setTitle("Update");
             stage.setScene(scene);
             stage.show();
             UpdateManager updateManager = fxmlLoader.getController();
