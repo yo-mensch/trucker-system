@@ -59,7 +59,6 @@ public class TruckerLoginTest {
         Platform.startup(() -> {});
     }
 
-
     @Test
     void testLoginFailed() throws IOException {
         // Arrange

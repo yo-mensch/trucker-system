@@ -46,7 +46,18 @@ public class LoginPage {
             } else {
                 FxUtils.generateAlert(Alert.AlertType.INFORMATION, "User login report", "No such user or wrong credentials");
             }
+        }else {
+            Trucker trucker = truckerHib.getTruckerByLoginData(emailField.getText(), passwordField.getText());
+            if (trucker != null) {
+                FXMLLoader fxmlLoader = new FXMLLoader(LoginPage.class.getResource("../fxml/front-page.fxml"));
+                Parent parent = fxmlLoader.load();
+                FrontPage frontPage = fxmlLoader.getController();
+                frontPage.setDataTrucker(entityManagerFactory, trucker, trucker);
+            } else {
+                FxUtils.generateAlert(Alert.AlertType.INFORMATION, "User login report", "No such user or wrong credentials");
+            }
         }
+
     }
 
     public void signUp() throws IOException {
