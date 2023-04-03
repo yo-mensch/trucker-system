@@ -9,6 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import javax.persistence.EntityManagerFactory;
+import java.io.IOException;
 
 public class CreateComment {
     public TextField titleField;
@@ -24,4 +25,11 @@ public class CreateComment {
         this.forumHib = new ForumHib(entityManagerFactory);
         this.selectedForum = selectedForum;
     }
+
+    public void createComment(){
+        Comment comment = null;
+        comment = new Comment(titleField.getText(), descriptionField.getText(), forumHib.getForumById(selectedForum.getId()));
+        commentHib.createComment(comment);
+    }
+
 }
