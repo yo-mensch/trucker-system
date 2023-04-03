@@ -59,4 +59,5 @@ public class LoginPage {
         SignUpPage signUpPage = fxmlLoader.getController();
         signUpPage.setData(entityManagerFactory);
     }
+
 }
