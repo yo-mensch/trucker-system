@@ -4,6 +4,7 @@ import Personel.*;
 import hibernate.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -19,6 +20,7 @@ import utils.FxUtils;
 
 import javax.persistence.EntityManagerFactory;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -170,31 +172,24 @@ public class FrontPage {
         fillList();
     }
 
+    private void showUpdatePage(URL resource, String title, Object controller, Object data, ListView list) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(resource);
+        Parent parent = fxmlLoader.load();
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        stage.setTitle(title);
+        stage.setScene(scene);
+        stage.show();
+
+        ((Initializable) controller).setData(entityManagerFactory, data);
+        list.getItems().clear();
+        fillList();
+    }
     public void editYourData() throws IOException {
-        if (user.getClass() == Trucker.class) {
-            FXMLLoader fxmlLoader = new FXMLLoader(UpdateTrucker.class.getResource("../fxml/update-trucker-page.fxml"));
-            Parent parent = fxmlLoader.load();
-            Scene scene = new Scene(parent);
-            Stage stage = new Stage();
-            stage.setTitle("Update");
-            stage.setScene(scene);
-            stage.show();
-            UpdateTrucker updateTrucker = fxmlLoader.getController();
-            updateTrucker.setData(entityManagerFactory, trucker);
-            truckerList.getItems().clear();
-            fillList();
-        } else {
-            FXMLLoader fxmlLoader = new FXMLLoader(UpdateManager.class.getResource("../fxml/update-manager-page.fxml"));
-            Parent parent = fxmlLoader.load();
-            Scene scene = new Scene(parent);
-            Stage stage = new Stage();
-            stage.setTitle("Update");
-            stage.setScene(scene);
-            stage.show();
-            UpdateManager updateManager = fxmlLoader.getController();
-            updateManager.setData(entityManagerFactory, manager);
-            managerList.getItems().clear();
-            fillList();
+        if (user instanceof Trucker) {
+            showUpdatePage(UpdateTrucker.class.getResource("../fxml/update-trucker-page.fxml"), "Update", fxmlLoader.getController(), trucker, truckerList);
+        } else if (user instanceof Manager) {
+            showUpdatePage(UpdateManager.class.getResource("../fxml/update-manager-page.fxml"), "Update", fxmlLoader.getController(), manager, managerList);
         }
     }
     //------------------FORUM----------------------
