@@ -169,6 +169,34 @@ public class FrontPage {
         truckerList.getItems().clear();
         fillList();
     }
+
+    public void editYourData() throws IOException {
+        if (user.getClass() == Trucker.class) {
+            FXMLLoader fxmlLoader = new FXMLLoader(UpdateTrucker.class.getResource("../fxml/update-trucker-page.fxml"));
+            Parent parent = fxmlLoader.load();
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setTitle("Update");
+            stage.setScene(scene);
+            stage.show();
+            UpdateTrucker updateTrucker = fxmlLoader.getController();
+            updateTrucker.setData(entityManagerFactory, trucker);
+            truckerList.getItems().clear();
+            fillList();
+        } else {
+            FXMLLoader fxmlLoader = new FXMLLoader(UpdateManager.class.getResource("../fxml/update-manager-page.fxml"));
+            Parent parent = fxmlLoader.load();
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setTitle("Update");
+            stage.setScene(scene);
+            stage.show();
+            UpdateManager updateManager = fxmlLoader.getController();
+            updateManager.setData(entityManagerFactory, manager);
+            managerList.getItems().clear();
+            fillList();
+        }
+    }
     //------------------FORUM----------------------
     public void deleteForum() {
         forumHib.deleteForum(forumHib.getForumById(forumList.getSelectionModel().getSelectedItem().getId()));
@@ -210,6 +238,29 @@ public class FrontPage {
         commentTree.setShowRoot(false);
         commentTree.getRoot().setExpanded(true);
         comments.forEach(comment -> addTreeItem(comment, commentTree.getRoot()));
+    }
+
+    public void createComment() throws IOException{
+        Stage stage = new Stage();
+        stage.setTitle("Create comment");
+        stage.setScene(new Scene(loadCreateCommentPage()));
+        stage.show();
+        CreateComment createComment = getFxmlLoader().getController();
+        setCreateCommentData(createComment);
+    }
+
+    private FXMLLoader getFxmlLoader() throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(CreateForum.class.getResource("../fxml/create-comment-page.fxml"));
+        return fxmlLoader;
+    }
+
+    private Parent loadCreateCommentPage() throws IOException {
+        return getFxmlLoader().load();
+    }
+
+
+    private void setCreateCommentData(CreateComment createComment){
+        createComment.setData(entityManagerFactory, forumList.getSelectionModel().getSelectedItem());
     }
 
     private void addTreeItem(Comment comment, TreeItem parent) {
@@ -469,6 +520,5 @@ public class FrontPage {
         destinationList.getItems().clear();
         fillList();
     }
-
 
 }
