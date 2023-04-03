@@ -213,12 +213,17 @@ public class FrontPage {
     }
 
     public void createComment() throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(CreateForum.class.getResource("../fxml/create-comment-page.fxml"));
-        Parent parent = fxmlLoader.load();
         Stage stage = new Stage();
         stage.setTitle("Create comment");
-        CreateComment createComment = fxmlLoader.getController();
+        stage.setScene(new Scene(getFxmlLoader().load()));
+        stage.show();
+        CreateComment createComment = getFxmlLoader().getController();
         setCreateCommentData(createComment);
+    }
+
+    private FXMLLoader getFxmlLoader() throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(CreateForum.class.getResource("../fxml/create-comment-page.fxml"));
+        return fxmlLoader;
     }
 
     private void setCreateCommentData(CreateComment createComment){
