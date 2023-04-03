@@ -32,7 +32,7 @@ public class CreateCargo {
     public void createCargo() throws IOException {
         Cargo cargo = null;
 
-        if (Integer.parseInt(weightField.getText()) > 10000) {
+        if (Integer.parseInt(weightField.getText()) > 18500) {
             throw new IllegalArgumentException("Weight limit exceeded");
         }
 
