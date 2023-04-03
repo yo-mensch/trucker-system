@@ -183,6 +183,18 @@ public class FrontPage {
             updateTrucker.setData(entityManagerFactory, trucker);
             truckerList.getItems().clear();
             fillList();
+        } else {
+            FXMLLoader fxmlLoader = new FXMLLoader(UpdateManager.class.getResource("../fxml/update-manager-page.fxml"));
+            Parent parent = fxmlLoader.load();
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setTitle("Delete");
+            stage.setScene(scene);
+            stage.show();
+            UpdateManager updateManager = fxmlLoader.getController();
+            updateManager.setData(entityManagerFactory, manager);
+            managerList.getItems().clear();
+            fillList();
         }
     }
     //------------------FORUM----------------------
