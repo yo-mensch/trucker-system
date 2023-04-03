@@ -31,8 +31,9 @@ public class CreateCargo {
 
     public void createCargo() throws IOException {
         Cargo cargo = null;
+        final int MAX_WEIGHT = 18500;
 
-        if (Integer.parseInt(weightField.getText()) > 18500) {
+        if (Integer.parseInt(weightField.getText()) > MAX_WEIGHT) {
             throw new IllegalArgumentException("Weight limit exceeded");
         }
 
