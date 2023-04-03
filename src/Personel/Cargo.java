@@ -21,8 +21,6 @@ public class Cargo {
     private String product;
     private int weight;
     private boolean hasExpiration;
-    @OneToMany (mappedBy = "cargo", cascade = CascadeType.ALL)
-    private List<Destination> cargoDestination;
 
     public Cargo(String contractedCompany, String product, int weight, boolean hasExpiration) {
         this.contractedCompany = contractedCompany;
@@ -31,13 +29,6 @@ public class Cargo {
         this.hasExpiration = hasExpiration;
     }
 
-    public Cargo(String contractedCompany, String product, int weight, boolean hasExpiration, List<Destination> cargoDestination) {
-        this.contractedCompany = contractedCompany;
-        this.product = product;
-        this.weight = weight;
-        this.hasExpiration = hasExpiration;
-        this.cargoDestination = cargoDestination;
-    }
 
     @Override
     public String toString() {

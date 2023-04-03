@@ -24,6 +24,8 @@ public class Truck {
     private String location;
     @ManyToOne
     private Trucker trucker;
+    @ManyToOne
+    private Destination jobs;
 
     public Truck(String numPlate, String make, String model, int year, boolean isInTransit, String location) {
         this.numPlate = numPlate;

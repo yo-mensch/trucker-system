@@ -18,43 +18,45 @@ public class Destination{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String start;
-    private String destination;
-    private int distance;
+    private double distance;
+    private String startPoint;
+    private String endPoint;
     private LocalDate departureDate;
     private LocalDate arrivalDate;
+    private Status status;
+    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
+    private List<CheckPoint> checkPoints;
+    @OneToMany(mappedBy = "jobs", cascade = CascadeType.ALL)
+    private List<Truck> truck;
     @ManyToOne
-    private Cargo cargo;
+    private Trucker driver;
     @ManyToOne
     private Manager responsibleManager;
-    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
-    private List<CheckPoint> checkPoint;
 
-    public Destination(String start, String destination, int distance, LocalDate departureDate, LocalDate arrivalDate) {
-        this.start = start;
-        this.destination = destination;
+
+    public Destination(double distance, String startPoint, String endPoint, LocalDate departureDate, LocalDate arrivalDate, Status status) {
         this.distance = distance;
+        this.startPoint = startPoint;
+        this.endPoint = endPoint;
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
+        this.status = status;
     }
 
-    public Destination(String start, String destination, int distance, LocalDate departureDate, LocalDate arrivalDate, Cargo cargo, Manager responsibleManager, List<CheckPoint> checkPoint) {
-        this.start = start;
-        this.destination = destination;
+    public Destination(double distance, String startPoint, String endPoint, LocalDate departureDate, LocalDate arrivalDate, Status status, Trucker driver, Manager responsibleManager) {
         this.distance = distance;
+        this.startPoint = startPoint;
+        this.endPoint = endPoint;
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
-        this.cargo = cargo;
+        this.status = status;
+        this.driver = driver;
         this.responsibleManager = responsibleManager;
-        this.checkPoint = checkPoint;
     }
 
     @Override
-    public String toString() {
-        return  "ID = " + id +
-                "\nStart = '" + start + '\'' +
-                "\nDestination = '" + destination + '\'' +
-                "\nDeparture date = '" + departureDate + '\'' +
-                "\nArrival date = '" + arrivalDate + '\'';
+    public String toString(){
+        return "ID: "+ id + "\nStatus: " + status+ "\nArrival Date: " + arrivalDate + "\nDeparture Date: " + departureDate  + "\nDriver:\n" + driver ;
     }
+
 }
