@@ -53,6 +53,12 @@ public class LoginPage {
                 Parent parent = fxmlLoader.load();
                 FrontPage frontPage = fxmlLoader.getController();
                 frontPage.setDataTrucker(entityManagerFactory, trucker, trucker);
+
+                Scene scene = new Scene(parent);
+                Stage stage = (Stage) passwordField.getScene().getWindow();
+                stage.setTitle("Front page");
+                stage.setScene(scene);
+                stage.show();
             } else {
                 FxUtils.generateAlert(Alert.AlertType.INFORMATION, "User login report", "No such user or wrong credentials");
             }
