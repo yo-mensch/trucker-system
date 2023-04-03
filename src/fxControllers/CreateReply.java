@@ -11,13 +11,19 @@ import javax.persistence.EntityManagerFactory;
 public class CreateReply {
     public TextField titleField;
     public TextArea descriptionField;
-    private CommentHib commentHib;
-    private Comment selectedComment;
-    private EntityManagerFactory entityManagerFactory;
+    public CommentHib commentHib;
+    public Comment selectedComment;
+    public EntityManagerFactory entityManagerFactory;
 
     public void setData(EntityManagerFactory entityManagerFactory, Comment selectedComment) {
         this.entityManagerFactory = entityManagerFactory;
         this.commentHib = new CommentHib(entityManagerFactory);
         this.selectedComment = selectedComment;
+    }
+
+    public void createReply(){
+        Comment comment = null;
+        comment = new Comment(titleField.getText(), descriptionField.getText(), commentHib.getCommentById(selectedComment.getId()));
+        commentHib.createComment(comment);
     }
 }

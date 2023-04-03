@@ -262,6 +262,18 @@ public class FrontPage implements Initializable {
         setCreateCommentData(createComment);
     }
 
+    public void createReply() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(CreateForum.class.getResource("../fxml/create-reply-page.fxml"));
+        Parent parent = fxmlLoader.load();
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        stage.setTitle("Create reply");
+        stage.setScene(scene);
+        stage.show();
+        CreateReply createReply = fxmlLoader.getController();
+        createReply.setData(entityManagerFactory, ((TreeItem<Comment>) commentTree.getSelectionModel().getSelectedItem()).getValue());
+    }
+
     private FXMLLoader getFxmlLoader() throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(CreateForum.class.getResource("../fxml/create-comment-page.fxml"));
         return fxmlLoader;
