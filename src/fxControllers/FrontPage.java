@@ -521,4 +521,12 @@ public class FrontPage {
         fillList();
     }
 
+    public void createReply(ActionEvent actionEvent) {
+    }
+
+    public void filterData(ActionEvent actionEvent) {
+    }
+
+    public void removeFilters(ActionEvent actionEvent) {
+    }
 }
