@@ -25,4 +25,11 @@ public class CreateComment {
         this.forumHib = new ForumHib(entityManagerFactory);
         this.selectedForum = selectedForum;
     }
+
+    public void createComment(){
+        Comment comment = null;
+        comment = new Comment(titleField.getText(), descriptionField.getText(), forumHib.getForumById(selectedForum.getId()));
+        commentHib.createComment(comment);
+    }
+
 }
