@@ -39,7 +39,7 @@ public class CreateCargo {
             throw new IllegalArgumentException("Weight limit exceeded");
         }
 
-        cargo = new Cargo(companyField.getText(), productField.getText(), Integer.parseInt(weightField.getText()), expirationCheck.isSelected());
+        cargo = new Cargo(companyField.getText(), productField.getText(), weight, expirationCheck.isSelected());
         cargoHib.createCargo(cargo);
     }
 }
