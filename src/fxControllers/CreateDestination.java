@@ -30,10 +30,10 @@ public class CreateDestination implements Initializable {
     public ChoiceBox statusField;
     public ComboBox driverCB;
     @FXML
-    private EntityManagerFactory entityManagerFactory;
+    public EntityManagerFactory entityManagerFactory;
     @FXML
-    private DestinationHib destinationHib;
-    private TruckerHib userHib;
+    public DestinationHib destinationHib;
+    public TruckerHib userHib;
     public List<Trucker> truckerList;
     public Manager user;
 
