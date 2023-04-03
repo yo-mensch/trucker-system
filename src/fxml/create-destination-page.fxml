@@ -5,13 +5,17 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="369.0" prefWidth="290.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxControllers.CreateDestination">
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<AnchorPane prefHeight="400.0" prefWidth="322.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxControllers.CreateDestination">
    <children>
-      <Button fx:id="createButton" layoutX="118.0" layoutY="308.0" mnemonicParsing="false" onAction="#createDestination" text="Create" />
-      <TextField fx:id="startField" layoutX="69.0" layoutY="50.0" promptText="Start" />
-      <TextField fx:id="destinationField" layoutX="70.0" layoutY="99.0" promptText="Destination" />
-      <TextField fx:id="distanceField" layoutX="70.0" layoutY="148.0" promptText="Distance" />
-      <DatePicker fx:id="arrivalDate" layoutX="58.0" layoutY="249.0" promptText="Arrival date" />
-      <DatePicker fx:id="departureDate" layoutX="58.0" layoutY="198.0" promptText="Departure date" />
+      <TextField fx:id="distanceField" layoutX="20.0" layoutY="20.0" promptText="Enter distance" />
+      <TextField fx:id="startPointField" layoutX="20.0" layoutY="57.0" promptText="Enter Start Point" />
+      <TextField fx:id="endPointField" layoutX="20.0" layoutY="92.0" promptText="Enter End Point" />
+      <Button fx:id="actionBtn" layoutX="235.0" layoutY="160.0" mnemonicParsing="false" onAction="#submit" text="Submit" />
+      <DatePicker fx:id="departureField" layoutX="20.0" layoutY="134.0" promptText="Departure date" />
+      <DatePicker fx:id="arrivalField" layoutX="20.0" layoutY="173.0" promptText="Arrival date" />
+      <ChoiceBox fx:id="statusField" layoutX="20.0" layoutY="217.0" prefWidth="150.0" />
+      <ComboBox fx:id="driverCB" layoutX="14.0" layoutY="294.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

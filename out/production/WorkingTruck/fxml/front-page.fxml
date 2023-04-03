@@ -7,6 +7,10 @@
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.TextField?>
 <TabPane fx:id="allTabs" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="780.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxControllers.FrontPage">
   <tabs>
     <Tab text="Home">
@@ -106,22 +110,28 @@
          </content>
       </Tab>
       <Tab fx:id="destinationTab" text="Destination Management">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="452.0" prefWidth="600.0">
-               <children>
-                  <ListView fx:id="destinationList" layoutX="256.0" layoutY="13.0" prefHeight="540.0" prefWidth="509.0" />
-                  <AnchorPane fx:id="destinationPane" layoutX="14.0" layoutY="60.0" prefHeight="197.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="viewDestinationField" layoutX="59.0" layoutY="2.0" mnemonicParsing="false" onAction="#viewDestination" prefHeight="25.0" prefWidth="105.0" text="View" />
-                        <Button fx:id="deleteDestinationField" layoutX="59.0" layoutY="59.0" mnemonicParsing="false" onAction="#deleteDestination" prefHeight="25.0" prefWidth="105.0" text="Delete" />
-                        <Button fx:id="updateDestinationField" layoutX="59.0" layoutY="115.0" mnemonicParsing="false" onAction="#updateDestination" prefHeight="25.0" prefWidth="105.0" text="Update" />
-                        <Button fx:id="createDestinationField" layoutX="59.0" layoutY="171.0" mnemonicParsing="false" onAction="#createDestination" prefHeight="25.0" prefWidth="105.0" text="Create" />
-                     </children>
-                  </AnchorPane>
-                  <Button layoutX="95.0" layoutY="515.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
-               </children>
-            </AnchorPane>
-         </content>
+          <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                      <ListView fx:id="destinationList" layoutX="192.0" layoutY="14.0" prefHeight="513.0" prefWidth="588.0" />
+                      <ChoiceBox fx:id="statusFilter" layoutX="15.0" layoutY="229.0" prefWidth="150.0" />
+                      <DatePicker fx:id="departureFilter" layoutX="8.0" layoutY="272.0" promptText="Departure date" />
+                      <Text layoutX="27.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                      <DatePicker fx:id="arrivalFilter" layoutX="8.0" layoutY="314.0" promptText="Arrival date" />
+                      <TextField fx:id="truckerFilter" layoutX="15.0" layoutY="358.0" promptText="Trucker ID" />
+                      <Button layoutX="68.0" layoutY="400.0" mnemonicParsing="false" onAction="#filterData" text="Filter" />
+                      <Button layoutX="50.0" layoutY="444.0" mnemonicParsing="false" onAction="#removeFilters" text="Clear Filters" />
+                      <AnchorPane fx:id="destinationPane" layoutX="24.0" layoutY="14.0" prefHeight="200.0" prefWidth="80.0">
+                          <children>
+                              <Button layoutX="2.0" layoutY="57.0" mnemonicParsing="false" onAction="#createDestination" prefHeight="25.0" prefWidth="85.0" text="Insert" />
+                              <Button layoutX="2.0" layoutY="90.0" mnemonicParsing="false" onAction="#updateDestination" prefHeight="25.0" prefWidth="85.0" text="Update" />
+                              <Button layoutX="2.0" layoutY="124.0" mnemonicParsing="false" onAction="#deleteDestination" prefHeight="25.0" prefWidth="85.0" text="Delete" />
+                              <Button layoutX="2.0" layoutY="25.0" mnemonicParsing="false" onAction="#viewDestination" prefHeight="25.0" prefWidth="85.0" text="View" />
+                          </children>
+                      </AnchorPane>
+                  </children>
+              </AnchorPane>
+          </content>
       </Tab>
       <Tab text="Forum">
         <content>
