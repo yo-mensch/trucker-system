@@ -1,0 +1,14 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.1' // or the appropriate version of JUnit you are using
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
