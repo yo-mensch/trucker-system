@@ -19,7 +19,7 @@ jobs:
           root: .
           paths:
             - build/libs
-            - build/classes
+            - build/classes/java
 
   test:
     docker:
