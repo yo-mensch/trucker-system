@@ -16,11 +16,11 @@ jobs:
           name: Build the project
           command: gradle build
       - store_artifacts:
-          path: out/production/WorkingTruck/test/java/FilterTests.class
+          path: build/reports/tests/test
       - persist_to_workspace:
           root: .
           paths:
-            - out/production/WorkingTruck
+            - build
 
   test:
     docker:
@@ -32,7 +32,9 @@ jobs:
           at: .
       - run:
           name: Run tests
-          command: gradle test
+          command: |
+            ./gradlew test --tests '*'
+            junitPlatformTestReport --scan
 
 workflows:
   version: 2
