@@ -15,15 +15,10 @@ jobs:
       - run:
           name: Build the project
           command: gradle build
-      - run:
-          name: Print project structure
-          command: find . -type d
       - persist_to_workspace:
           root: .
           paths:
-            - build/libs
-            - build/classes/java
-
+            - out/production/WorkingTruck
 
   test:
     docker:
