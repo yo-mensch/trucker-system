@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: Install OpenJFX
-          command: sudo apt-get update && sudo apt-get install -y openjfx
+          command: apt-get update && apt-get install -y openjfx
       - run:
           name: Build the project
           command: ./gradlew build
@@ -21,8 +21,7 @@ jobs:
       - checkout
       - run:
           name: Install OpenJFX
-          command: sudo apt-get update && sudo apt-get install -y openjfx
+          command: apt-get update && apt-get install -y openjfx
       - run:
           name: Run unit tests
           command: ./gradlew test
-
