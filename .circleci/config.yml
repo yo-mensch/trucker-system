@@ -1,30 +1,36 @@
 version: 2.1
+
 jobs:
   build:
     docker:
-      - image: azul/zulu-openjdk:19
-    working_directory: ~/repo
+      - image: circleci/openjdk:14-jdk-buster
+    working_directory: ~/trucker-system
     steps:
       - checkout
       - run:
-          name: Install OpenJFX
-          command: apt-get update && apt-get install -y openjfx
+          name: Install Gradle
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y gradle
       - run:
           name: Build the project
           command: gradle build
-
   test:
     docker:
-      - image: azul/zulu-openjdk:19
-    working_directory: ~/repo
+      - image: circleci/openjdk:14-jdk-buster
+    working_directory: ~/trucker-system
     steps:
       - checkout
       - run:
-            name: Install Maven
-            command: apt-get update && apt-get install -y maven
+          name: Install Gradle
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y gradle
       - run:
-          name: Install OpenJFX
-          command: apt-get update && apt-get install -y openjfx
-      - run:
-          name: Run unit tests
-          command: mvn test
+          name: Build the project
+          command: gradle test
+
+workflows:
+  build:
+    jobs:
+      - build
