@@ -16,10 +16,11 @@ jobs:
           name: Build the project
           command: gradle build
       - persist_to_workspace:
-          root: .
-          paths:
-            - build/libs
-            - build/classes/java
+        root: .
+        paths:
+          - build/output/libs
+          - build/output/classes
+
 
   test:
     docker:
