@@ -1,4 +1,4 @@
-package test;
+package test.java;
 
 import Personel.Destination;
 import Personel.Status;
