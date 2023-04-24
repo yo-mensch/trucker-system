@@ -16,7 +16,23 @@ jobs:
           name: Build the project
           command: gradle build
 
+  test:
+    docker:
+      - image: circleci/openjdk:14-jdk-buster
+    working_directory: ~/trucker-system
+    steps:
+      - checkout
+      - run:
+          name: Install Gradle
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y gradle
+      - run:
+          name: Run tests
+          command: gradle test
+
 workflows:
-  build:
+  build-test:
     jobs:
       - build
+      - test
