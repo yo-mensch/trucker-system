@@ -22,22 +22,18 @@ jobs:
           paths:
             - out/production/WorkingTruck
 
-  test:
-    docker:
-      - image: circleci/openjdk:14-jdk-buster
-    working_directory: ~/trucker-system
-    steps:
-      - checkout
-      - run:
-          name: Install Gradle
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y gradle
-      - attach_workspace:
-          at: .
-      - run:
-          name: Run tests
-          command: gradle test --tests src.test.java.FilterTests
+test:
+  docker:
+    - image: circleci/openjdk:14-jdk-buster
+  working_directory: ~/trucker-system
+  steps:
+    - checkout
+    - attach_workspace:
+        at: .
+    - run:
+        name: Run tests
+        command: gradle test
+
 
 workflows:
   version: 2
