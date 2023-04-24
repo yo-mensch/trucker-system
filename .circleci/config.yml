@@ -15,7 +15,10 @@ jobs:
       - run:
           name: Build the project
           command: gradle build
-
+      - run:
+          name: Run tests
+          command: gradle test --tests FilterTests
+          
 workflows:
   build:
     jobs:
