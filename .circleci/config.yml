@@ -16,7 +16,7 @@ jobs:
           name: Build the project
           command: gradle build
       - store_artifacts:
-          path: out/production/WorkingTruck
+          path: out/production/WorkingTruck/test/java/FilterTests.class
       - persist_to_workspace:
           root: .
           paths:
@@ -37,7 +37,7 @@ jobs:
           at: .
       - run:
           name: Run tests
-          command: gradle test --tests FilterTests
+          command: gradle test --tests src.test.java.FilterTests
 
 workflows:
   version: 2
