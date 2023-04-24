@@ -35,7 +35,7 @@ jobs:
           at: .
       - run:
           name: Run tests
-          command: gradle test --tests FilterTests
+          command: gradle test
 
 workflows:
   version: 2
