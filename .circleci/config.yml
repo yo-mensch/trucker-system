@@ -7,20 +7,20 @@ jobs:
     working_directory: ~/trucker-system
     steps:
       - checkout
-      - setup_remote_docker
-      - restore_cache:
-          key: maven-{{ checksum "pom.xml" }}
+      - run:
+          name: Install Gradle
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y gradle
       - run:
           name: Build the project
-          command: mvn clean install
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: maven-{{ checksum "pom.xml" }}
+          command: gradle build
+      - store_artifacts:
+          path: out/production/WorkingTruck/test/java/FilterTests.class
       - persist_to_workspace:
           root: .
           paths:
-            - target
+            - out/production/WorkingTruck
 
   test:
     docker:
@@ -28,17 +28,18 @@ jobs:
     working_directory: ~/trucker-system
     steps:
       - checkout
-      - setup_remote_docker
-      - restore_cache:
-          key: maven-{{ checksum "pom.xml" }}
+      - run:
+          name: Install Gradle
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y gradle
       - attach_workspace:
           at: .
       - run:
           name: Run tests
-          command: mvn test
+          command: gradle test --tests src.test.java.FilterTests
 
 workflows:
-
   version: 2
   build_and_test:
     jobs:
