@@ -32,10 +32,9 @@ jobs:
           command: gradle test
 
 workflows:
-  workflows:
-    build:
-      jobs:
-        - build
-        - test:
-            requires:
-              - build
+  build:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
