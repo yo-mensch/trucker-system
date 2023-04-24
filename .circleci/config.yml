@@ -1,21 +1,23 @@
-# This is a sample configuration file for building a Maven-based Java project
+version: 2.1
 
-# Define the version of the pipeline
-version: 1.0
+orbs:
+  java: circleci/openjdk@1.2.2
 
-# Define the language and environment for your project
-language: java
-jdk: zulu-19
+jobs:
+  build:
+    working_directory: ~/trucker-system
+    docker:
+      - image: circleci/openjdk:11-jdk
+    steps:
+      - checkout
+      - java/setup-jdk
+      - run: ./gradlew build
+      - store_artifacts:
+          path: build/libs/*.jar
+          destination: jars
 
-# Define the build pipeline stages
-stages:
-  - build
-
-# Define the build job
-build:
-  stage: build
-  script:
-    - mvn clean install -DskipTests=true
-  artifacts:
-    paths:
-      - target/*.jar
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
