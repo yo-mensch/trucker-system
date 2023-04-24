@@ -1,6 +1,7 @@
 package test.java;
 
 import Personel.Destination;
+import Personel.*;
 import Personel.Status;
 import hibernate.DestinationHib;
 import org.junit.jupiter.api.BeforeEach;
