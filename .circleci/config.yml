@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:14-jdk-buster
-    working_directory: ~/my-project
+    working_directory: ~/trucker-system
     steps:
       - checkout
       - run:
@@ -16,16 +16,16 @@ jobs:
           name: Build the project
           command: gradle build
       - store_artifacts:
-          path: build/reports/tests/test/index.html
+          path: out/production/WorkingTruck/test/java/FilterTests.class
       - persist_to_workspace:
           root: .
           paths:
-            - build/reports/tests/test/index.html
+            - out/production/WorkingTruck
 
   test:
     docker:
       - image: circleci/openjdk:14-jdk-buster
-    working_directory: ~/my-project
+    working_directory: ~/trucker-system
     steps:
       - checkout
       - attach_workspace:
