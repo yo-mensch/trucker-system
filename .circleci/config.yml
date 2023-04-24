@@ -15,12 +15,10 @@ jobs:
       - run:
           name: Build the project
           command: gradle build
-      - store_artifacts:
-          path: build/reports/tests/test
       - persist_to_workspace:
           root: .
           paths:
-            - build
+            - out/production/WorkingTruck
 
   test:
     docker:
